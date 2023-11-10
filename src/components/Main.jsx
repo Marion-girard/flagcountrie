@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+//import ListItem from "./ListItem";
+import Api from "./Api"
 
 
 export default function Main() {
@@ -20,15 +22,9 @@ export default function Main() {
                     />
                 </label>
             </form>
-
+          
             <div className="card">
-                <img src="" alt="Country flag" />
-                <ul>
-                    <li>Population :</li>
-                    <li>Region :</li>
-                    <li>Capital :</li>
-                </ul>
-                bouh caca
+                <Api/>
                 
             </div>
         </main>

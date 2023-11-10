@@ -1,47 +1,53 @@
-import React from "react";
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
+import ListItem from "./ListItem";
+import Select from "./Select"; // Assurez-vous d'importer le composant Select
 
 export default function Api() {
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
+  const [uniqueRegions, setUniqueRegions] = useState([]);
+  const [selectedRegion, setSelectedRegion] = useState("");
 
-    // Note: the empty deps array [] means
-    // this useEffect will run once
-    // similar to componentDidMount()
-    useEffect(() => {
-        fetch("https://restcountries.com/v3.1/all")
-        .then(res => res.json())
-        .then(
-            (result) => {
-            setIsLoaded(true);
-            setItems(result);
-            },
-          // Note: it's important to handle errors here
-          // instead of a catch() block so that we don't swallow
-          // exceptions from actual bugs in components.
-            (error) => {
-            setIsLoaded(true);
-            setError(error);
-            }
-        )
-    }, [])
+  useEffect(() => {
+    fetch("https://restcountries.com/v3.1/all")
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          setItems(result);
+          const region = result.map((item) => item.region);
+          const newRegion = new Set(region);
+          setUniqueRegions(Array.from(newRegion));
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      );
+  }, []);
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-        return <div>Loading...</div>;
-    } else {
-        return (
-            <ul>
-                {items.map(item => (
-                <li key={item.cca3}>
-                {item.name.common}
-                
-                </li>
-                ))}
-            </ul>
-        );
-    }
+  const handleChange = (event) => {
+    setSelectedRegion(event.target.value);
+  };
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <>
+        <Select regions={uniqueRegions} onChange={handleChange} />
+
+        {items
+          .filter((item) => selectedRegion === "" || item.region === selectedRegion)
+          .map((item) => (
+            <ListItem key={item.cca3} country={item} />
+          ))}
+      </>
+    );
+  }
 }
+
 
