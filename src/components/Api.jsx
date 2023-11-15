@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ListItem from "./ListItem";
 import Select from "./Select"; // Assurez-vous d'importer le composant Select
 import Search from "./Search";
+import Country from "./Country";
 
 export default function Api() {
   const [error, setError] = useState(null);
@@ -28,7 +29,7 @@ export default function Api() {
         }
       );
   }, []);
-
+  console.log('Items in Api:', items); // Ajoutez cette ligne
   const handleChange = (event) => {
     setSelectedRegion(event.target.value);
     
@@ -38,11 +39,11 @@ export default function Api() {
   }
   const handleKeyDown = (e) => {
     let { key } = e;
-    if (key === "Enter" && inputName !== "") {
+    if (key !== "Enter" || inputName === "") return ;
       // Handle key down logic directly here
-      console.log("Enter key pressed, handle it here");
+      //console.log("Enter key pressed, handle it here");
       // You can perform any additional logic here
-    }
+    
   };
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -57,7 +58,7 @@ export default function Api() {
         {items
             .filter((item) => (selectedRegion === "" || item.region === selectedRegion)  && (inputName === "" || item.name.common.toLowerCase().includes(inputName.toLowerCase())))
             .map((item) => (
-                <ListItem key={item.cca3} country={item} />
+                <Country key={item.cca3} country={item} />
           ))}
       </>
     );
