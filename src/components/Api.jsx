@@ -29,7 +29,7 @@ export default function Api() {
         }
       );
   }, []);
-  console.log('Items in Api:', items); // Ajoutez cette ligne
+   // Ajoutez cette ligne
   const handleChange = (event) => {
     setSelectedRegion(event.target.value);
     
@@ -58,7 +58,7 @@ export default function Api() {
         {items
             .filter((item) => (selectedRegion === "" || item.region === selectedRegion)  && (inputName === "" || item.name.common.toLowerCase().includes(inputName.toLowerCase())))
             .map((item) => (
-                <Country key={item.cca3} country={item} />
+                <ListItem key={item.cca3} country={item} />
           ))}
       </>
     );
