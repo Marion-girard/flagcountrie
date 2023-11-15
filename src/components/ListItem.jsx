@@ -8,6 +8,7 @@ const ListItem = ({ country }) =>(
         <div 
         id="div2" 
         onClick={() => { 
+            
             console.log(country.name.common);
             
         }}>

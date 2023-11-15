@@ -59,7 +59,13 @@ export default function Api() {
             .filter((item) => (selectedRegion === "" || item.region === selectedRegion)  && (inputName === "" || item.name.common.toLowerCase().includes(inputName.toLowerCase())))
             .map((item) => (
                 <ListItem key={item.cca3} country={item} />
+                
           ))}
+
+        {items
+        .map((item) => (
+          <Country key={item.name.common} country={item} />
+        ))}
       </>
     );
   }
