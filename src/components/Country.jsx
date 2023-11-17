@@ -1,30 +1,70 @@
 
 
 import React from 'react';
-import { useParams } from 'react-router-dom';
+
 import ListItem from './ListItem';
+import {Routes, Route, useParams} from 'react-router-dom';
 
-const Country = ({ item }) => {
-  console.log('Items:', item); 
-  const { countryName } = useParams();
+function CountryProfile() {
+  // Récupérer le paramètre du nom du pays depuis l'URL
+  let { countryName } = useParams();
 
-  return (<li key={country}>
+  // Effectuer une requête à l'API pour obtenir les informations du pays
+  // Assurez-vous d'utiliser un état pour stocker les données du pays et de gérer l'état de chargement et les erreurs si nécessaire.
+
+  // Exemple d'utilisation de l'API Fetch
+  const [countryData, setCountryData] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchCountryData = async () => {
+      try {
+        const response = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
+        const data = await response.json();
+        setCountryData(data[0]); // Supposons que l'API renvoie un tableau et que nous prenions le premier élément
+      } catch (error) {
+        console.error('Error fetching country data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCountryData();
+  }, [countryName]);
+
+  // Rendu conditionnel en fonction de l'état de chargement ou des données du pays
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!countryData) {
+    return <div>Country not found</div>;
+  }
+
+  // ... le reste du rendu en utilisant les données du pays (countryData)
+
+  return (
     <div>
+      <h2>{countryData.name.common}</h2>
+      
+      
+
     <ul>
-    
-        <li><img src={country.flags.png} alt="Country flag" /></li>
-        <li>Name : {country.name.common}</li>
-        <li>Population : {country.population}</li>
-        <li>Region : {country.region}</li>
-        <li>Capital : {country.capital}</li>
-        <li>Sub Region : {country.subregion}</li>
-        <li>Top Level Domain : {country.tld}</li>
-        <li>Currencie : {country.currencies}</li>
-        <li>Languages : {country.languages}</li>
+    <li><img src={countryData.flags.png} alt="Country flag" /></li>
+      <li>Name: {countryData.name.common}</li>
+      <li>Population: {countryData.population}</li>
+      <li>Region: {countryData.region}</li>
+      <li>Capital: {countryData.capital}</li>
+      <li>Sub Region: {countryData.subregion}</li>
+      <li>Top Level Domain: {countryData.tld}</li>
+      <li>Currencies: {countryData.currencies.name}</li>
+      
+     
     </ul>
+      
     </div>
-</li>)
-};
+  );
+}
 
 
-export default Country;
+export default CountryProfile;

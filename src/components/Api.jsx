@@ -64,7 +64,7 @@ export default function Api() {
 
         {items
         .map((item) => (
-          <Country key={item.name.common} country={item} />
+          <Country key={item.name.common}   />
         ))}
       </>
     );
