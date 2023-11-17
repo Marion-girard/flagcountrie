@@ -7,7 +7,7 @@ import {Routes, Route, useParams} from 'react-router-dom';
 
 function CountryProfile() {
   // Récupérer le paramètre du nom du pays depuis l'URL
-  let { countryName } = useParams();
+  let { common } = useParams();
 
   // Effectuer une requête à l'API pour obtenir les informations du pays
   // Assurez-vous d'utiliser un état pour stocker les données du pays et de gérer l'état de chargement et les erreurs si nécessaire.
@@ -19,7 +19,7 @@ function CountryProfile() {
   React.useEffect(() => {
     const fetchCountryData = async () => {
       try {
-        const response = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
+        const response = await fetch(`https://restcountries.com/v3.1/name/${common}`);
         const data = await response.json();
         setCountryData(data[0]); // Supposons que l'API renvoie un tableau et que nous prenions le premier élément
       } catch (error) {
@@ -30,7 +30,7 @@ function CountryProfile() {
     };
 
     fetchCountryData();
-  }, [countryName]);
+  }, [common]);
 
   // Rendu conditionnel en fonction de l'état de chargement ou des données du pays
   if (loading) {
@@ -57,8 +57,7 @@ function CountryProfile() {
       <li>Capital: {countryData.capital}</li>
       <li>Sub Region: {countryData.subregion}</li>
       <li>Top Level Domain: {countryData.tld}</li>
-      <li>Currencies: {countryData.currencies.name}</li>
-      
+     
      
     </ul>
       

@@ -1,17 +1,19 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 
 
-const ListItem = ({ country }) =>( 
-    
+const ListItem = ({ country }) =>{
    
+    const navigate = useNavigate()
+
+    const handleClick = () => {
+        navigate(`/${country.name.common}`);
+      }
+   return(
     <li key={country}>
         <div 
         id="div2" 
-        onClick={() => { 
-            
-            console.log(country.name.common);
-            
-        }}>
+        onClick={handleClick}>
         <ul>
         
             <li><img src={country.flags.png} alt="Country flag" /></li>
@@ -22,6 +24,6 @@ const ListItem = ({ country }) =>(
         </ul>
         </div>
     </li>
-    
     )
+   }
     export default ListItem;
