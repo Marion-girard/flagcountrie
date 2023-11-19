@@ -6,13 +6,12 @@ import ListItem from './ListItem';
 import {Routes, Route, useParams} from 'react-router-dom';
 
 function CountryProfile() {
-  // Récupérer le paramètre du nom du pays depuis l'URL
+  
   let { common } = useParams();
 
-  // Effectuer une requête à l'API pour obtenir les informations du pays
-  // Assurez-vous d'utiliser un état pour stocker les données du pays et de gérer l'état de chargement et les erreurs si nécessaire.
+  
 
-  // Exemple d'utilisation de l'API Fetch
+
   const [countryData, setCountryData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
 
@@ -21,7 +20,7 @@ function CountryProfile() {
       try {
         const response = await fetch(`https://restcountries.com/v3.1/name/${common}`);
         const data = await response.json();
-        setCountryData(data[0]); // Supposons que l'API renvoie un tableau et que nous prenions le premier élément
+        setCountryData(data[0]); 
       } catch (error) {
         console.error('Error fetching country data:', error);
       } finally {
@@ -32,7 +31,7 @@ function CountryProfile() {
     fetchCountryData();
   }, [common]);
 
-  // Rendu conditionnel en fonction de l'état de chargement ou des données du pays
+  
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -41,8 +40,7 @@ function CountryProfile() {
     return <div>Country not found</div>;
   }
 
-  // ... le reste du rendu en utilisant les données du pays (countryData)
-
+  
   return (
     <div>
       <h2>{countryData.name.common}</h2>

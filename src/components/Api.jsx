@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ListItem from "./ListItem";
-import Select from "./Select"; // Assurez-vous d'importer le composant Select
+import Select from "./Select"; 
 import Search from "./Search";
 import Country from "./Country";
 
@@ -11,6 +11,7 @@ export default function Api() {
   const [uniqueRegions, setUniqueRegions] = useState([]);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [inputName, setInputName] =useState ("")
+
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
@@ -29,7 +30,7 @@ export default function Api() {
         }
       );
   }, []);
-   // Ajoutez cette ligne
+
   const handleChange = (event) => {
     setSelectedRegion(event.target.value);
     
@@ -40,10 +41,8 @@ export default function Api() {
   const handleKeyDown = (e) => {
     let { key } = e;
     if (key !== "Enter" || inputName === "") return ;
-      // Handle key down logic directly here
-      //console.log("Enter key pressed, handle it here");
-      // You can perform any additional logic here
-    
+      
+    setInputName("")
   };
   if (error) {
     return <div>Error: {error.message}</div>;
