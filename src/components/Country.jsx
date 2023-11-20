@@ -55,7 +55,8 @@ function CountryProfile() {
       <li>Capital: {countryData.capital}</li>
       <li>Sub Region: {countryData.subregion}</li>
       <li>Top Level Domain: {countryData.tld}</li>
-     
+      <li>language: {Object.values(countryData.languages).join(', ')}</li>
+      <li>Currencie: {Object.values(countryData.currencies).map(currency => `${currency.name} (${currency.symbol})`).join(', ')}</li>
      
     </ul>
       
