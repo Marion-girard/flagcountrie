@@ -31,19 +31,25 @@ export default function Api() {
       );
   }, []);
 
-  const handleChange = (event) => {
-    setSelectedRegion(event.target.value);
+  const handleChange = (e) => {
+    setSelectedRegion(e.target.value);
     
   };
-  const handleChangeName =(event) =>{
-    setInputName(event.target.value)
+  const handleChangeName =(e) =>{
+    
   }
   const handleKeyDown = (e) => {
     let { key } = e;
-    if (key !== "Enter" || inputName === "") 
-    return ;
+    if (key !== "Enter" || inputName === "") return console.log('test');
       
-    setInputName("")
+  
+  };
+
+  const handleTodoTitleChange = (value) => {
+    setNewTodo({
+      ...newTodo,
+      title: value,
+    });
   };
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -52,7 +58,7 @@ export default function Api() {
   } else {
     return (
       <>
-        <Search value={inputName} onChange={handleChangeName}  onKeyDown ={handleKeyDown}/>
+        <Search value={inputName} onChange={handleChangeName}  handleKeyDownFromTodo ={handleKeyDown}/>
         <Select regions={uniqueRegions} onChange={handleChange} />
 
         {items

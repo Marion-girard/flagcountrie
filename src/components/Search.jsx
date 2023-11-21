@@ -1,16 +1,27 @@
 import React from "react";
 
-const Search = ({value, onChange, onKeyDown}) =>(
+export default function Search(inputName, handleKeyDownFromTodo, handleTodoTitleChange) {
+    const handleKeyDown = (e) => {
+        let { key } = e;
+        if (key !== "Enter" || inputName === "") return;
+    
+        handleKeyDownFromTodo(key);
+      };
+    const handleChangeName = (e) => {
+        handleTodoTitleChange(e.target.value);
+      };
+
+
+return (
     <form action="">
     <label>
         <input
             type="text"
-            value={value}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
+            value={inputName}
+            onChange={handleChangeName}
+            onKeyDown={handleKeyDown}
             placeholder="Search for a country..."
         />
     </label>
-</form>
-)
-export default Search
+</form>)
+}
