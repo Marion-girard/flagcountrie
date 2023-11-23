@@ -40,9 +40,9 @@ export default function Api() {
   }
   const handleKeyDown = (e) => {
     let { key } = e;
-    if (key !== "Enter" || inputName === "") 
+    if (key !== "Enter" || inputName !== "") 
     return ;
-    e.preventDefault(); 
+      
     console.log("bouh")
   };
   if (error) {

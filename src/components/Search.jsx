@@ -11,6 +11,5 @@ const Search = ({inputName, onChange, onKeyDown}) =>(
             placeholder="Search for a country..."
         />
     </label>
-</form>
-)
-export default Search
+</form>)
+
