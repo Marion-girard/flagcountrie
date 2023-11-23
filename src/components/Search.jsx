@@ -1,11 +1,11 @@
 import React from "react";
 
-const Search = ({value, onChange, onKeyDown}) =>(
+const Search = ({inputName, onChange, onKeyDown}) =>(
     <form action="">
     <label>
         <input
             type="text"
-            value={value}
+            value={inputName}
             onChange={onChange}
             onKeyDown={onKeyDown}
             placeholder="Search for a country..."

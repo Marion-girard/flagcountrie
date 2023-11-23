@@ -32,12 +32,9 @@ function CountryProfile() {
   }, [common]);
 
   
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   if (!countryData) {
-    return <div>Country not found</div>;
+    return 
   }
 
   

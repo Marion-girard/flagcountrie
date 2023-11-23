@@ -42,8 +42,8 @@ export default function Api() {
     let { key } = e;
     if (key !== "Enter" || inputName === "") 
     return ;
-      
-    setInputName("")
+    e.preventDefault(); 
+    console.log("bouh")
   };
   if (error) {
     return <div>Error: {error.message}</div>;
