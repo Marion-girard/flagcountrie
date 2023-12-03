@@ -10,6 +10,7 @@ const ListItem = ({ country }) =>{
         navigate(`/${country.name.common}`);
       }
    return(
+    <div>
     <li key={country}>
         <div 
         id="div2" 
@@ -24,6 +25,7 @@ const ListItem = ({ country }) =>{
         </ul>
         </div>
     </li>
+    </div>
     )
    }
     export default ListItem;

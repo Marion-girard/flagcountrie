@@ -1,20 +1,19 @@
 import React from "react";
 
-export default function Search(inputName, handleKeyDownFromTodo, handleTodoTitleChange) {
-    const handleKeyDown = (e) => {
-        let { key } = e;
-        if (key !== "Enter" || inputName === "") return;
-    
-        handleKeyDownFromTodo(key);
-      };
-    const handleChangeName = (e) => {
-        handleTodoTitleChange(e.target.value);
-      };
+export default function Search({inputName, handleKeyDownFromTodo, handleTodoTitleChange}){
 
-
-return (
-    <form action="">
-    <label>
+    const handleKeyDown = (event) => {
+        let { key } = event;
+        if (key !== "Enter" || inputName === " ") return 
+        event.preventDefault();
+        console.log('test');
+        handleKeyDownFromTodo(key)
+    };
+    const handleChangeName = (event) => {
+        handleTodoTitleChange(event.target.value);
+    };
+return(
+    <div>
         <input
             type="text"
             value={inputName}
@@ -22,6 +21,6 @@ return (
             onKeyDown={handleKeyDown}
             placeholder="Search for a country..."
         />
-    </label>
-</form>)
+    </div>
+);
 }

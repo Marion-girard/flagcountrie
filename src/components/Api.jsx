@@ -31,26 +31,28 @@ export default function Api() {
       );
   }, []);
 
-  const handleChange = (e) => {
-    setSelectedRegion(e.target.value);
+  const handleChange = (event) => {
+    setSelectedRegion(event.target.value);
     
-  };
-  const handleChangeName =(e) =>{
-    
-  }
-  const handleKeyDown = (e) => {
-    let { key } = e;
-    if (key !== "Enter" || inputName === "") return console.log('test');
-      
-  
   };
 
   const handleTodoTitleChange = (value) => {
-    setNewTodo({
-      ...newTodo,
-      title: value,
-    });
+    setInputName(value)
   };
+
+  const handleChangeName =(event) =>{
+    //setInputName(event.target.value)
+  }
+  const handleKeyDown = (key) => {
+    
+    if (key !== "Enter" || inputName === " ") return 
+    
+    console.log('test');
+    setInputName(inputName)
+  
+  };
+
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
@@ -58,9 +60,13 @@ export default function Api() {
   } else {
     return (
       <>
-        <Search value={inputName} onChange={handleChangeName}  handleKeyDownFromTodo ={handleKeyDown}/>
+        <Search 
+          value={inputName} 
+          handleTodoTitleChange={handleTodoTitleChange}  
+          handleKeyDownFromTodo ={handleKeyDown}
+        />
         <Select regions={uniqueRegions} onChange={handleChange} />
-
+        <div className="pays">
         {items
             .filter((item) => (selectedRegion === "" || item.region === selectedRegion)  && (inputName === "" || item.name.common.toLowerCase().includes(inputName.toLowerCase())))
             .map((item) => (
@@ -72,6 +78,7 @@ export default function Api() {
         .map((item) => (
           <Country key={item.name.common}   />
         ))}
+        </div>
       </>
     );
   }
