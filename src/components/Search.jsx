@@ -17,7 +17,7 @@ return(
         <input
             type="text"
             value={inputName}
-            onChange={handleChangeName}
+            onChange={handleChangeName }
             onKeyDown={handleKeyDown}
             placeholder="Search for a country..."
         />
